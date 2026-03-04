@@ -185,7 +185,7 @@ def generate_markdown_from_transcript(transcription):
 
     ## Q&A Forum
     - **Question:** (Specify the question summarized)
-    - **Answer summary:** (Specify the anwser summary)
+    - **Answer summary:** (Specify the answer summary)
 
     ## Detailed response
     - Use bullet points for each key discussion point.
