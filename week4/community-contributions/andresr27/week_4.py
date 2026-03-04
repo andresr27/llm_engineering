@@ -445,24 +445,21 @@ def load_tts_model():
         tts_processor = SpeechT5Processor.from_pretrained(
             model_name,
             cache_dir=cache_dir,
-            token=hf_token,  # Changed from use_auth_token
-            trust_remote_code=True
+            token=hf_token  # Changed from use_auth_token
         )
         
         logger.info(f"Loading TTS model from {model_name}")
         tts_model = SpeechT5ForTextToSpeech.from_pretrained(
             model_name,
             cache_dir=cache_dir,
-            token=hf_token,  # Changed from use_auth_token
-            trust_remote_code=True
+            token=hf_token  # Changed from use_auth_token
         )
         
         logger.info(f"Loading TTS vocoder from {vocoder_name}")
         tts_vocoder = SpeechT5HifiGan.from_pretrained(
             vocoder_name,
             cache_dir=cache_dir,
-            token=hf_token,  # Changed from use_auth_token
-            trust_remote_code=True
+            token=hf_token  # Changed from use_auth_token
         )
         
         # Move models to device after loading
