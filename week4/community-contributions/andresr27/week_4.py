@@ -230,7 +230,19 @@ def generate_markdown_from_transcript(transcription):
 # TODO: How to get a transcript summary into the chatbox instead of just the transcript
 # TODO: Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
 def process_audio_input(text_input, audio_input):
-    """Process audio input using speech recognition and return updated history and audio response."""
+    """
+    Process optional text and audio input using speech recognition.
+
+    If audio is provided and the speech recognizer is available, the audio is
+    transcribed and appended to any existing text input to form a final user
+    message. If no text input is provided, the final user message is just the
+    transcribed text.
+
+    Returns:
+        str | None: The final user message (text input plus transcription or
+        transcription alone). Returns the original text_input if no audio is
+        provided, and returns None if the speech recognizer is not available.
+    """
     if audio_input is None:
         logger.warn("No audio input provided")
         return text_input
