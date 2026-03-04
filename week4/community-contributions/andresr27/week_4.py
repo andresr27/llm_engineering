@@ -120,7 +120,7 @@ def get_platform_config(platform_name):
         if not (openai_api_key and openai_api_url):
             # Use print for initial configuration before logger is fully ready
             # But logger should be ready now
-            logger.warn("OpenRouter API Key not set")
+            logger.warning("OpenRouter API Key not set")
             
         config["client_params"]["base_url"] = openai_api_url
         config["client_params"]["api_key"] = openai_api_key
