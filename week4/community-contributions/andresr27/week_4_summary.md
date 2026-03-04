@@ -52,14 +52,14 @@ The implementation includes several audio processing techniques:
 - `OPENROUTER_API_URL`: OpenRouter API URL
 
 ### Dependencies
-All required Python packages are listed in `requirements.txt`, including:
+Install the following Python packages (either by adding them to your own `requirements.txt` or installing them manually with `pip`):
 - Core: gradio, openai, torch, transformers
 - Audio processing: soundfile, scipy, librosa
 - Utilities: structlog, python-dotenv
 
 ## Usage Instructions
 
-1. **Install dependencies**: `pip install -r requirements.txt`
+1. **Install dependencies**: `pip install gradio openai torch transformers soundfile scipy librosa structlog python-dotenv`
 2. **Set environment variables**: Configure HF_TOKEN and platform-specific keys
 3. **Run the application**: `python week_4.py`
 4. **Access the interface**: Open the Gradio interface in your browser
