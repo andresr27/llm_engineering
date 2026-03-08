@@ -1,12 +1,11 @@
 # Change Log
 
-## Week 6: Children's Book Reader & UI Refinement
-**Goal:** Pivot the application into a specialized Children's Book Reader with a magical persona and refined UI.
-- **Knowledge Source Update:** Switched RAG source from course docs to `/books/*.txt` files.
-- **Persona Refactor:** Updated system prompts and Markdown summaries to act as a friendly "Magic Storyteller".
-- **UI Customization:** Renamed UI to "Magic Story Reader", adjusted chatbot dimensions (50% taller), and updated labels for a child-friendly experience.
-- **TTS Optimization:** Standardized audio output to 24000Hz across `edge-tts` and fallback systems.
-- **Test Suite Update:** Replaced technical AI engineering tests with "The Tale of Peter Rabbit" reading verification.
+## Week 6: Capstone Project - The Price Is Right
+**Goal:** Consolidate the price prediction model and implement advanced neural network features.
+- **Model Consolidation:** Migrated code from Jupyter notebooks into `capstone.py`.
+- **Architecture Upgrade:** Implemented an 8-layer neural network with `BatchNorm1d` and `Dropout` for better generalization.
+- **Optimization:** Switched to `AdamW` optimizer and added `CosineAnnealingLR` scheduler.
+- **Evaluation:** Established baseline performance using human predictions and initial neural network runs.
 
 ## Week 5: RAG System Implementation
 **Goal:** Build an expert knowledge worker using Retrieval Augmented Generation to answer course-specific questions.
