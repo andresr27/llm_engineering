@@ -4,7 +4,6 @@ import math
 from tqdm import tqdm
 from huggingface_hub import login
 import torch
-import transformers
 from transformers import AutoModelForCausalLM, AutoTokenizer, BitsAndBytesConfig, set_seed
 from datasets import load_dataset, Dataset, DatasetDict
 from datetime import datetime
