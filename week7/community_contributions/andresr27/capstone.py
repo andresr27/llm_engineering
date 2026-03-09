@@ -46,6 +46,8 @@ os.environ["PYTORCH_ALLOC_CONF"] = "expandable_segments:True,max_split_size_mb:3
 # Log in to HuggingFace
 
 hf_token = os.getenv('HF_TOKEN')
+if not hf_token:
+    raise EnvironmentError("HF_TOKEN environment variable is not set.")
 torch.cuda.empty_cache()
 login(hf_token, add_to_git_credential=True)
 
