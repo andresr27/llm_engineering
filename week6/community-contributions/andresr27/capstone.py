@@ -38,8 +38,8 @@ with open('human_in.csv', 'w', encoding="utf-8") as csvfile:
     writer = csv.writer(csvfile)
     for t in test[:100]:
         writer.writerow([t.summary, 0])
-# Read it back in
 
+# Read it back in
 human_predictions = []
 with open('human_out.csv', 'r', encoding="utf-8") as csvfile:
     reader = csv.reader(csvfile)

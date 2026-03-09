@@ -16,5 +16,14 @@
     },
     "estimate": 930.8824204895075,
     "discount": 225.88242048950747
+  },
+  {
+    "deal": {
+      "product_description": "Samsung Galaxy Z Fold4 (256GB) is a flagship foldable Android smartphone with a 7.6\" QXGA+ AMOLED inner foldable display and a cover display for one-handed use. It is powered by the Qualcomm Snapdragon 8+ Gen 1 processor, paired with 12GB of RAM and 256GB of storage, and runs Android with Samsung's foldable-optimized software. The rear triple-camera system includes a 50MP main sensor plus ultra-wide and telephoto lenses, and the phone supports high-refresh-rate visuals for smooth scrolling and multitasking.",
+      "price": 327.0,
+      "url": "https://www.dealnews.com/products/Samsung/Unlocked-Samsung-Galaxy-Z-Fold-4-256-GB-Android-Smart-Phone/433944.html?iref=rss-c142"
+    },
+    "estimate": 1323.8592895507813,
+    "discount": 996.8592895507813
   }
 ]
