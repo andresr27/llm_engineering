@@ -41,7 +41,7 @@ use_bf16 = capability[0] >= 8
 
 
 # Memory Management for local GPU
-os.environ["PYTORCH_ALLOC_CONF"] = "expandable_segments:True,max_split_size_mb:32"
+os.environ["PYTORCH_CUDA_ALLOC_CONF"] = "expandable_segments:True,max_split_size_mb:32"
 
 # Log in to HuggingFace
 
