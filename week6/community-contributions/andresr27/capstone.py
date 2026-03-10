@@ -1,8 +1,3 @@
-"""
-Capstone Project: "The Price Is Right"
-Predict product prices based on textual descriptions.
-"""
-
 import os
 from dotenv import load_dotenv
 from huggingface_hub import login
@@ -97,15 +92,21 @@ class NeuralNetwork(nn.Module):
         return self.layer6(x)
 
 
-# Convert data to PyTorch tensors
-X_train_tensor = torch.FloatTensor(X.toarray())
-y_train_tensor = torch.FloatTensor(y).unsqueeze(1)
+# Convert data to PyTorch tensors (modified to avoid X.toarray() on entire dataset)
+# First, split the sparse SciPy matrix X and numpy array y
+X_train_sparse, X_val_sparse, y_train_split, y_val_split = train_test_split(
+    X, y, test_size=0.01, random_state=42
+)
 
-# Split the data into training and validation sets
-X_train, X_val, y_train, y_val = train_test_split(X_train_tensor, y_train_tensor, test_size=0.01, random_state=42)
+# Now convert the split sparse SciPy matrices to dense PyTorch FloatTensors
+# This avoids calling .toarray() on the entire X dataset at once, reducing memory footprint.
+X_train_tensor = torch.FloatTensor(X_train_sparse.toarray())
+X_val_tensor = torch.FloatTensor(X_val_sparse.toarray())
+y_train_tensor = torch.FloatTensor(y_train_split).unsqueeze(1)
+y_val_tensor = torch.FloatTensor(y_val_split).unsqueeze(1)
 
 # Create the loader
-train_dataset = TensorDataset(X_train, y_train)
+train_dataset = TensorDataset(X_train_tensor, y_train_tensor)
 train_loader = DataLoader(train_dataset, batch_size=64, shuffle=True)
 
 # Initialize the model
@@ -142,8 +143,8 @@ for epoch in range(EPOCHS):
 
     model.eval()
     with torch.no_grad():
-        val_outputs = model(X_val)
-        val_loss = loss_function(val_outputs, y_val)
+        val_outputs = model(X_val_tensor)
+        val_loss = loss_function(val_outputs, y_val_tensor)
 
     print(f'Epoch [{epoch + 1}/{EPOCHS}], Train Loss: {loss.item():.3f}, Val Loss: {val_loss.item():.3f}')
 
@@ -153,6 +154,7 @@ def neural_network(item):
     model.eval()
     with torch.no_grad():
         vector = vectorizer.transform([item.summary])
+        # Convert single item sparse vector to dense for model input
         vector = torch.FloatTensor(vector.toarray())
         result = model(vector)[0].item()
     return max(0, result)
