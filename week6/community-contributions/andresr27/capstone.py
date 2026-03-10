@@ -28,22 +28,36 @@ train, val, test = Item.from_hub(dataset)
 print(f"Loaded {len(train):,} training items, {len(val):,} validation items, {len(test):,} test items")
 
 # Write the test set to a CSV
+# Only write if human_in.csv doesn't exist to prevent overwriting manual input
+if not os.path.exists('human_in.csv'):
+    with open('human_in.csv', 'w', encoding="utf-8") as csvfile:
+        writer = csv.writer(csvfile)
+        for t in test[:100]:
+            writer.writerow([t.summary, 0])
+else:
+    print("human_in.csv already exists. Skipping writing to prevent overwrite.")
 
-with open('human_in.csv', 'w', encoding="utf-8") as csvfile:
-    writer = csv.writer(csvfile)
-    for t in test[:100]:
-        writer.writerow([t.summary, 0])
 # Read it back in
 
 human_predictions = []
-with open('human_out.csv', 'r', encoding="utf-8") as csvfile:
-    reader = csv.reader(csvfile)
-    for row in reader:
-        human_predictions.append(float(row[1]))
+# Check if human_out.csv exists before attempting to read it
+if os.path.exists('human_out.csv'):
+    with open('human_out.csv', 'r', encoding="utf-8") as csvfile:
+        reader = csv.reader(csvfile)
+        for row in reader:
+            human_predictions.append(float(row[1]))
+else:
+    print("human_out.csv not found. Human predictions will be empty.")
 
 def human_pricer(item):
     idx = test.index(item)
-    return human_predictions[idx]
+    # Ensure human_predictions is not empty before accessing elements
+    if human_predictions:
+        return human_predictions[idx]
+    else:
+        # Return a default value or raise an error if predictions are missing
+        print("Warning: human_predictions is empty. Returning 0.")
+        return 0
 
 human = human_pricer(test[0])
 actual = test[0].price
