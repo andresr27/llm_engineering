@@ -1,19 +1,5 @@
 # Change Log
 
-## Week 5: RAG System Refinement
-
-### Changes Made:
-1. **Improved Document Chunking**
-   - Replaced simple chunking with a recursive character splitting strategy in `models.py`.
-   - Increased default chunk size to 600 and overlap to 100 for better context retention.
-2. **Enhanced Logging**
-   - Updated `app.py` to provide clearer logs during the RAG retrieval process.
-
-### Dependencies Added:
-- pytest>=7.4.0
-- pytest-asyncio>=0.23.0
-- chromadb>=0.6.3
-
 ## Week 5: RAG System Implementation
 **Goal:** Build an expert knowledge worker using Retrieval Augmented Generation to answer course-specific questions.
 - **ChromaDB Integration:** Set up persistent vector storage for course documentation.
@@ -46,3 +32,7 @@
 - Implemented `process_input` to handle text and audio.
 - Integrated `gpt-5-mini` and `gpt-audio-mini`.
 - Added real-time audio playback in Gradio.
+<<<<<<< HEAD
+=======
+```
+>>>>>>> main

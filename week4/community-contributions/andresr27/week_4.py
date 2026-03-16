@@ -120,7 +120,7 @@ def get_platform_config(platform_name):
         if not (openai_api_key and openai_api_url):
             # Use print for initial configuration before logger is fully ready
             # But logger should be ready now
-            logger.warn("OpenRouter API Key not set")
+            logger.warning("OpenRouter API Key not set")
             
         config["client_params"]["base_url"] = openai_api_url
         config["client_params"]["api_key"] = openai_api_key
@@ -185,7 +185,7 @@ def generate_markdown_from_transcript(transcription):
 
     ## Q&A Forum
     - **Question:** (Specify the question summarized)
-    - **Answer summary:** (Specify the anwser summary)
+    - **Answer summary:** (Specify the answer summary)
 
     ## Detailed response
     - Use bullet points for each key discussion point.
@@ -230,7 +230,19 @@ def generate_markdown_from_transcript(transcription):
 # TODO: How to get a transcript summary into the chatbox instead of just the transcript
 # TODO: Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
 def process_audio_input(text_input, audio_input):
-    """Process audio input using speech recognition and return updated history and audio response."""
+    """
+    Process optional text and audio input using speech recognition.
+
+    If audio is provided and the speech recognizer is available, the audio is
+    transcribed and appended to any existing text input to form a final user
+    message. If no text input is provided, the final user message is just the
+    transcribed text.
+
+    Returns:
+        str | None: The final user message (text input plus transcription or
+        transcription alone). Returns the original text_input if no audio is
+        provided, and returns None if the speech recognizer is not available.
+    """
     if audio_input is None:
         logger.warn("No audio input provided")
         return text_input
@@ -433,24 +445,21 @@ def load_tts_model():
         tts_processor = SpeechT5Processor.from_pretrained(
             model_name,
             cache_dir=cache_dir,
-            token=hf_token,  # Changed from use_auth_token
-            trust_remote_code=True
+            token=hf_token  # Changed from use_auth_token
         )
         
         logger.info(f"Loading TTS model from {model_name}")
         tts_model = SpeechT5ForTextToSpeech.from_pretrained(
             model_name,
             cache_dir=cache_dir,
-            token=hf_token,  # Changed from use_auth_token
-            trust_remote_code=True
+            token=hf_token  # Changed from use_auth_token
         )
         
         logger.info(f"Loading TTS vocoder from {vocoder_name}")
         tts_vocoder = SpeechT5HifiGan.from_pretrained(
             vocoder_name,
             cache_dir=cache_dir,
-            token=hf_token,  # Changed from use_auth_token
-            trust_remote_code=True
+            token=hf_token  # Changed from use_auth_token
         )
         
         # Move models to device after loading
